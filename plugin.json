@@ -1,0 +1,19 @@
+{
+  "id": "neobase.sudoku",
+  "name": "Sudoku",
+  "version": "1.0.0",
+  "author": "NDesumeur",
+  "description": "Grilles à solution unique en 4 niveaux, notes au crayon, annulation, indices ; la partie en cours est gardée.",
+  "icon": "icon.png",
+  "entry": "index.js",
+  "view": "sudoku",
+  "neobase": ">=4.0.0",
+  "type": "app",
+  "category": "Jeux",
+  "mobile": false,
+  "system": false,
+  "dependencies": {},
+  "permissions": [
+    "full"
+  ]
+}
