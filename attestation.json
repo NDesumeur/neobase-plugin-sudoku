@@ -1,0 +1,9 @@
+{
+  "pluginId": "neobase.sudoku",
+  "repo": "NDesumeur/neobase-plugin-sudoku",
+  "version": "1.0.0",
+  "sha256": "bd57936be412970b57de2200a094b2e4414a860aa4b9a4bc09f6a296a94c3ce0",
+  "approvedAt": "2026-10-31T16:22:01.605Z",
+  "neobase": ">=4.0.0",
+  "signature": "FT1Z4AaGjikKsClm2B8cpm2yd0cihYMRCLcCVCTfhIUKoslNyMmvxtUoO1TvL3MHPGNrcGcWMScosBpgvwZYBQ=="
+}
