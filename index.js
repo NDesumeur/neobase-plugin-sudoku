@@ -2,11 +2,35 @@
 // Ses données sont dans le dossier du plugin, que NeoBase sauvegarde (synchro cloud et sauvegardes) ; à la première ouverture elle reprend ce que tu avais dans NeoBase.
 // Elle demande l'accès complet pour utiliser les outils d'interface de NeoBase. NeoBase ne l'ouvre que si elle est signée.
 const HTML = "<div class=\"appWrap\">\n      <div class=\"agHead\"><span class=\"label\">Sudoku</span><span class=\"hint\" id=\"sdInfo\"></span><div class=\"agNav\"><select class=\"f gSel\" id=\"sdLevel\"><option value=\"facile\">Facile</option><option value=\"moyen\" selected>Moyen</option><option value=\"difficile\">Difficile</option><option value=\"expert\">Expert</option><option value=\"diabolique\">Diabolique</option></select><button class=\"btn px\" id=\"sdNew\">NOUVELLE GRILLE</button></div></div>\n      <div class=\"sdMain\"><div id=\"sdGrid\" class=\"px\"></div><div class=\"sdSide\"><div class=\"sdTime\" id=\"sdTime\">0:00</div><div id=\"sdPad\"></div><div class=\"row\"><button class=\"btn px\" id=\"sdNoteBtn\">Notes : non</button><button class=\"btn px\" id=\"sdErase\">Effacer</button></div><div class=\"row\"><button class=\"btn px\" id=\"sdUndoBtn\">Annuler</button><button class=\"btn px\" id=\"sdHint\">Indice</button></div><label class=\"check\"><input type=\"checkbox\" id=\"sdErrors\" checked> Montrer les erreurs</label></div></div>\n      <div class=\"hint\">Clavier : chiffres pour remplir, Maj + chiffre (ou N) pour les notes, flèches pour bouger, Retour arrière pour effacer, Ctrl + Z pour annuler. La grille en cours est gardée.</div>\n    </div>";
+/*CSS-MOVED*/ const CSS = `.gSel{width:auto;font-size:14px;padding:6px 10px;margin-right:8px}
+.sdMain{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap}
+#sdGrid{--fill:var(--line2);display:grid;grid-template-columns:repeat(9,58px);gap:1px;padding:3px}
+.sdCell{border:0;padding:0;width:58px;height:58px;background:var(--win);color:#fff;font:600 28px var(--text);cursor:var(--cp,pointer);position:relative}
+.sdCell.br{margin-right:3px}
+.sdCell.bb{margin-bottom:3px}
+.sdCell.given{color:var(--lilac)}
+.sdCell.user{color:var(--pink)}
+.sdCell.near{background:#1a1038}
+.sdCell.same{background:#2b1a5a}
+.sdCell.sel{background:#3e2a7a;box-shadow:inset 0 0 0 3px var(--pink)}
+.sdCell.wrong{color:var(--red);background:#2a0b1a}
+.sdNotes{position:absolute;inset:3px;display:grid;grid-template-columns:repeat(3,1fr);font:12px var(--text);color:var(--muted)}
+.sdNotes span{display:grid;place-items:center}
+.sdNotes .hl{color:#fff;background:rgba(var(--pkr),.35)}
+.sdSide{display:flex;flex-direction:column;gap:14px;width:260px}
+.sdTime{font:22px var(--title);color:#fff}
+#sdPad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sdKey{height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.sdKey b{font:22px var(--title)}
+.sdKey small{font-size:12px;color:var(--muted)}
+.sdKey.full{opacity:.45}
+`;  // le style de ce plugin (il utilise les variables du thème de NeoBase)
 export default async function (ctx) {
   const view = ctx.view;
   if (!ctx.host) { view.textContent = "Ce plugin doit être approuvé par NeoBase pour s'ouvrir."; return; }
   const host = ctx.host, { el, toast, sfx, ask, newTab, pixIcon, PIX, WX } = host;
   const folder = ctx.folder, legacy = ctx.legacy || {};
+  ctx.host.addStyle(CSS);
   view.innerHTML = HTML;
   const $ = id => id === "sudokuApp" ? view : (view.querySelector('#' + id) || document.getElementById(id));  // les identifiants de ta vue d'abord, puis ceux de la page (fenêtres, menus)
   const doc = async n => { try { return await folder.read(n); } catch { return null; } };
