@@ -1,6 +1,6 @@
 {
-  "pluginId": "neobase.sudoku",
-  "repo": "NDesumeur/neobase-plugin-sudoku",
+  "pluginId": "neodex.sudoku",
+  "repo": "NDesumeur/neodex-plugin-sudoku",
   "version": "1.0.1",
   "sha256": "2abb2eed5e84214863b3523fde5320d4c502881ab0a86068a3d5b27a77ea4d0d",
   "approvedAt": "2026-10-31T17:51:20.982Z",

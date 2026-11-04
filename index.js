@@ -1,6 +1,6 @@
 // Sudoku : ton appli d'origine (HTML et code inchangés), livrée en plugin.
-// Ses données sont dans le dossier du plugin, que NeoBase sauvegarde (synchro cloud et sauvegardes) ; à la première ouverture elle reprend ce que tu avais dans NeoBase.
-// Elle tourne dans le bac à sable de NeoBase, avec ses outils d'interface (ctx.host) et seulement les autorisations de son plugin.json.
+// Ses données sont dans le dossier du plugin, que NeoDex sauvegarde (synchro cloud et sauvegardes) ; à la première ouverture elle reprend ce que tu avais dans NeoDex.
+// Elle tourne dans le bac à sable de NeoDex, avec ses outils d'interface (ctx.host) et seulement les autorisations de son plugin.json.
 const HTML = "<div class=\"appWrap\">\n      <div class=\"agHead\"><span class=\"label\">Sudoku</span><span class=\"hint\" id=\"sdInfo\"></span><div class=\"agNav\"><select class=\"f gSel\" id=\"sdLevel\"><option value=\"facile\">Facile</option><option value=\"moyen\" selected>Moyen</option><option value=\"difficile\">Difficile</option><option value=\"expert\">Expert</option><option value=\"diabolique\">Diabolique</option></select><button class=\"btn px\" id=\"sdNew\">NOUVELLE GRILLE</button></div></div>\n      <div class=\"sdMain\"><div id=\"sdGrid\" class=\"px\"></div><div class=\"sdSide\"><div class=\"sdTime\" id=\"sdTime\">0:00</div><div id=\"sdPad\"></div><div class=\"row\"><button class=\"btn px\" id=\"sdNoteBtn\">Notes : non</button><button class=\"btn px\" id=\"sdErase\">Effacer</button></div><div class=\"row\"><button class=\"btn px\" id=\"sdUndoBtn\">Annuler</button><button class=\"btn px\" id=\"sdHint\">Indice</button></div><label class=\"check\"><input type=\"checkbox\" id=\"sdErrors\" checked> Montrer les erreurs</label></div></div>\n      <div class=\"hint\">Clavier : chiffres pour remplir, Maj + chiffre (ou N) pour les notes, flèches pour bouger, Retour arrière pour effacer, Ctrl + Z pour annuler. La grille en cours est gardée.</div>\n    </div>";
 /*CSS-MOVED*/ const CSS = `.gSel{width:auto;font-size:14px;padding:6px 10px;margin-right:8px}
 .sdMain{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap}
@@ -24,10 +24,10 @@ const HTML = "<div class=\"appWrap\">\n      <div class=\"agHead\"><span class=\
 .sdKey b{font:22px var(--title)}
 .sdKey small{font-size:12px;color:var(--muted)}
 .sdKey.full{opacity:.45}
-`;  // le style de ce plugin (il utilise les variables du thème de NeoBase)
+`;  // le style de ce plugin (il utilise les variables du thème de NeoDex)
 export default async function (ctx) {
   const view = ctx.view;
-  if (!ctx.host) { view.textContent = "Ce plugin doit être approuvé par NeoBase pour s'ouvrir."; return; }
+  if (!ctx.host) { view.textContent = "Ce plugin doit être approuvé par NeoDex pour s'ouvrir."; return; }
   const host = ctx.host, { el, toast, sfx, ask, newTab, pixIcon, PIX, WX } = host;
   const folder = ctx.folder, legacy = ctx.legacy || {};
   ctx.host.addStyle(CSS);
